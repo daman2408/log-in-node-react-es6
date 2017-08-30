@@ -8,7 +8,7 @@ app.use(morgan('dev'));
 app.set('views', './views')
 app.set('view engine', 'pug');
 
-app.get('/', (req, res) => {
+app.get(['/', '/signup'], (req, res) => {
   res.render('index', {title: 'Hey', message: 'Hello There!'})
 });
 

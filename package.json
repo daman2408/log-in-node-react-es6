@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon --exec babel-node app.js",
+    "start": "nodemon --exec babel-node app.js --ignore public/",
     "dev": "webpack -wd",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -14,12 +14,14 @@
     "body-parser": "^1.17.2",
     "bootstrap": "4.0.0-alpha.6",
     "express": "^4.15.4",
+    "mongodb": "^2.2.31",
     "morgan": "^1.8.2",
     "nodemon": "^1.11.0",
     "pug": "^2.0.0-rc.3",
     "react": "^15.6.1",
     "react-bootstrap": "^0.31.2",
     "react-dom": "^15.6.1",
+    "react-router-dom": "^4.2.2",
     "webpack": "^3.5.5"
   },
   "devDependencies": {
