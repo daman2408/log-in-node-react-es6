@@ -3,14 +3,14 @@ import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 
 const LogInForm = (props) => {
 //on form submission, get the input values, check database to see if user exists, password hashes match, if pass, authenticate, send token back
-const logInSubmit = (e) => {
-  e.preventDefault();
-  console.log('submitted');
-}
+// const logInSubmit = (e) => {
+//   e.preventDefault();
+//   console.log('submitted');
+// }
     return (
       <div className="container-fluid">
         <div className="container">
-          <form className="padded" onSubmit={logInSubmit}>
+          <form className="padded" onSubmit={props.submitFunction}>
             <div className="row justify-content-center">
               <div className="col-12 align-self-center">
                 <input className="form-control mr-sm-2" type="email" placeholder="email" />
