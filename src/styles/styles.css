@@ -1,0 +1,38 @@
+body {
+  background-color: #0275d8;
+}
+
+html {
+  font-size: 14px;
+}
+
+@include media-breakpoint-up(sm) {
+  html {
+    font-size: 20px;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  html {
+    font-size: 28px;
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  html {
+    font-size: 36px;
+  }
+}
+
+.jumbotron {
+  background-color: transparent;
+  text-align: center;
+}
+
+.padded {
+  padding: 25px
+}
+
+.col-12 {
+  padding-bottom: 8px
+}
