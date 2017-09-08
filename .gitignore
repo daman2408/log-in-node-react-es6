@@ -13,8 +13,8 @@
 .env.development.local
 .env.test.local
 .env.production.local
-./gulpfile.js
-./.netlify
+gulpfile.js
+.netlify
 ./dist
 
 npm-debug.log*
