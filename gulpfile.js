@@ -6,8 +6,7 @@ const css = require('gulp-css');
 const run = require('gulp-run');
 const webpack = require('webpack-stream');
 const babel = require('gulp-babel');
-const gls = require('gulp-live-server');
-const livereload = require('gulp-livereload');
+const webpackConfig = require('./webpack.config.js');
 
 //"p" stands for paths
 const p = {
@@ -17,12 +16,12 @@ const p = {
   cssFiles: './src/styles/*.css'
 }
 
-//clean out the build folder before running any gulp tasks
-
+// //clean out the build folder before running any gulp tasks
+//
 gulp.task('clean:public', function() {
   return del([p.public])
 });
-
+//
 gulp.task('clean:dist', function() {
   return del(['./dist'])
 });
@@ -33,64 +32,19 @@ gulp.task('html', function() {
   .pipe(pug())
   .pipe(gulp.dest(p.public));
 });
-
+//
 //move all css files inside ./src into ./public/styles
 gulp.task('css', function() {
   return gulp.src(p.cssFiles)
   .pipe(css())
   .pipe(gulp.dest('./public/styles'))
-  .pipe(livereload())
 });
-
+//
 gulp.task('bootstrap-js', function() {
   return gulp.src('./node_modules/bootstrap/dist/js/bootstrap.min.js')
   .pipe(gulp.dest('./public/js'))
 });
 
-//transpile app.js to es2015
-
-gulp.task('transpile-app', function() {
-  return gulp.src('./server/app.js')
-  .pipe(babel())
-  .pipe(gulp.dest('./dist/server'))
-});
-
-gulp.task('transpile-config', function() {
-  return gulp.src('./config.js')
-  .pipe(babel())
-  .pipe(gulp.dest('./dist/'))
-});
-
-gulp.task('transpile-mong', function() {
-  return gulp.src('./UserSchema.js')
-  .pipe(babel())
-  .pipe(gulp.dest('./dist'))
-});
-
-//watch server/app.js and restart server with any changes
-
-gulp.task('serve', function() {
-  gulp.watch(p.cssFiles, [ 'css' ]);
-
-  var server = gls.new('./dist/server/app.js');
-  server.start();
-
-  gulp.watch('./server/app.js', function() {
-    server.start.bind(server)()
-  });
-
-});
-
-gulp.task('watch', function() {
-  livereload.listen({
-    port: 3000
-  });
-  gulp.watch('./src/styles/styles.css', [ 'css' ])
-});
-
-gulp.task('start', function() {
-  return sequence('clean:dist','transpile-app', 'transpile-config', 'transpile-mong', 'serve')()
-});
 
 gulp.task('build', function() {
   return gulp.src('./src/index.js')

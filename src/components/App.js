@@ -35,7 +35,7 @@ signUpSubmit = e => {
       <div>
         <div className='mh-100'>
           <div className="jumbotron">
-            <h1 className="display-1">My Project</h1>
+            <h1 className="display-1 title">My Project</h1>
           </div>
         </div>
         <Router>

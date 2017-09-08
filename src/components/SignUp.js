@@ -47,7 +47,7 @@ const SignUp = (props) => {
         </fieldset>
         <div className="form-group row">
           <div className="offset-sm-2 col-sm-10">
-            <button type="submit" className="btn btn-block btn-success">Sign Up</button>
+            <button type="submit" className="btn btn-block btn-danger">Sign Up</button>
                       </div>
                     </div>
                   </form>

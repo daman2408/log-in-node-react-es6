@@ -26,7 +26,7 @@ const LogInForm = (props) => {
           <p className="text-center">or</p>
           <div className="row justify-content-center padded">
             <div className="col-12 align-self-center">
-              <Link to="/signup"><button className="btn btn-outline-success btn-block my-2 my-sm-0 text-white">Create New Account</button></Link>
+              <Link to="/signup"><button className="btn btn-outline-success btn-block my-2 my-sm-0 text-white">Create New</button></Link>
             </div>
           </div>
         </div>
