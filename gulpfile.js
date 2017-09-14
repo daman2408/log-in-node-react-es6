@@ -6,7 +6,6 @@ const css = require('gulp-css');
 const run = require('gulp-run');
 const webpack = require('webpack-stream');
 const babel = require('gulp-babel');
-const webpackConfig = require('./webpack.config.js');
 
 //"p" stands for paths
 const p = {
@@ -26,24 +25,36 @@ gulp.task('clean:dist', function() {
   return del(['./dist'])
 });
 
+
 //compile view engine files to html and place inside ./public
+
+
 gulp.task('html', function() {
   return gulp.src(p.pugFiles)
   .pipe(pug())
   .pipe(gulp.dest(p.public));
 });
-//
+
+
 //move all css files inside ./src into ./public/styles
+
+
 gulp.task('css', function() {
   return gulp.src(p.cssFiles)
   .pipe(css())
   .pipe(gulp.dest('./public/styles'))
 });
-//
+
+//get bootstrap js file and place in ./public/js
+
+
 gulp.task('bootstrap-js', function() {
   return gulp.src('./node_modules/bootstrap/dist/js/bootstrap.min.js')
   .pipe(gulp.dest('./public/js'))
 });
+
+
+//bundle react files into ./public/js using webpack plugin, 'webpack-stream'
 
 
 gulp.task('build', function() {
@@ -51,6 +62,10 @@ gulp.task('build', function() {
   .pipe(webpack(require('./webpack.config.js')))
   .pipe(gulp.dest('./public/js/'))
 });
+
+
+//using sequence(), set an order for commands to be called in
+
 
 gulp.task('sort', function() {
   return sequence('clean:public','html', 'css', 'bootstrap-js','build')()

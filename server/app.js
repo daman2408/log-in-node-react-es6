@@ -1,10 +1,11 @@
-import express from 'express'
-const app = express();
+import express from 'express';
 import morgan from 'morgan';
 import config from '../config.js';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import User from '../UserSchema.js';
+
+const app = express();
 
 mongoose.connect('mongodb://localhost/myProject', {
   useMongoClient: true
@@ -13,21 +14,23 @@ mongoose.connect('mongodb://localhost/myProject', {
 mongoose.Promise = global.Promise;
 
 app.use(morgan('dev'));
-app.set('views', './server/views')
+app.set('views', './server/views');
 app.set('view engine', 'pug');
 app.use(express.static('public'));
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
 app.get(['/', '/signUp'], (req, res) => {
-  res.render('index', {title: 'Hey', message: 'Hello There!'})
+  res.render('index', {title: 'My Project'});
 });
 
 app.post('/signUp', (req, res, next) => {
   var user = new User(req.body);
-  console.log(user);
   user.save((err, user) => {
-    if(err) {return next(err)}
-  })
+    if(err) {
+      return next(err);
+    }
+    console.log(user);
+  });
 });
 
 

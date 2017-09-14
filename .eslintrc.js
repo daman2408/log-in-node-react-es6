@@ -1,4 +1,3 @@
-
 module.exports = {
   "parser": 'babel-eslint',
   "env": {
@@ -7,7 +6,7 @@ module.exports = {
     "es6": true,
     "node": true
   },
-  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "extends": ["plugin:react/recommended"],
   "parserOptions": {
     "ecmaFeatures": {
       "experimentalObjectRestSpread": true,

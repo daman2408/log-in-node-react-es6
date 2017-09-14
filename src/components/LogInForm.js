@@ -1,5 +1,6 @@
 import React from 'react';
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const LogInForm = (props) => {
 //on form submission, get the input values, check database to see if user exists, password hashes match, if pass, authenticate, send token back
@@ -7,7 +8,7 @@ const LogInForm = (props) => {
 //   e.preventDefault();
 //   console.log('submitted');
 // }
-    return (
+  return (
       <div className="container-fluid">
         <div className="container">
           <form className="padded" onSubmit={props.submitFunction}>
@@ -31,6 +32,11 @@ const LogInForm = (props) => {
           </div>
         </div>
       </div>
-        )}
+  );
+};
+
+LogInForm.propTypes = {
+  submitFunction: PropTypes.func
+};
 
 export default LogInForm;

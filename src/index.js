@@ -1,9 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App.js';
-import Styles from 'style-loader!css-loader?modules!./styles/styles.css';
-
-alert('hello');
+// import Styles from 'style-loader!css-loader?modules!./styles/styles.css';
 
 ReactDOM.render(<div>
   <App />
