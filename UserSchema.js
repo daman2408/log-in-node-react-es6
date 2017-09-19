@@ -22,4 +22,11 @@ var UserSchema = new mongoose.Schema({
   }
 });
 
+UserSchema.methods = {
+  toJson: function() {
+    var obj = this.toObject();
+    return obj;
+  }
+};
+
 export default mongoose.model('User', UserSchema);

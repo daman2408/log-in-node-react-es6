@@ -22,7 +22,23 @@ class App extends React.Component {
       password: e.target.password.value,
       gender: e.target.gridRadios.value
     };
-    axios.post('/signUp', user);
+    axios.post('/signUp', user)
+    .then((resp) => {
+      if (resp.status === 200) {
+        console.log('successfully signed up :)');
+        document.getElementById('emailDiv').className = 'form-group row has-success';
+        document.getElementById('inputEmail').className = 'form-control form-control-success';
+        document.getElementById('usernameFeedback').style.display = 'none';
+      }
+    })
+      .catch((error) => {
+        if (error.response) {
+          //validation form username input;
+          document.getElementById('emailDiv').className = 'form-group row has-danger';
+          document.getElementById('inputEmail').className = 'form-control form-control-danger';
+          document.getElementById('usernameFeedback').style.display = 'block';
+        }
+      });
   }
 
   render() {

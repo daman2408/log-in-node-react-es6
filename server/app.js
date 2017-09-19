@@ -23,13 +23,44 @@ app.get(['/', '/signUp'], (req, res) => {
   res.render('index', {title: 'My Project'});
 });
 
+app.get('/jam', (req, res) => {
+  res.render('welcome', {title: 'welcome', message: 'Welcome :)'});
+});
+
 app.post('/signUp', (req, res, next) => {
-  var user = new User(req.body);
-  user.save((err, user) => {
-    if(err) {
-      return next(err);
-    }
-    console.log(user);
+  User.findOne({username: req.body.username})
+    .then((err, user) => {
+      if (user) {
+        // res.status(500).send('username already exists');
+        console.error(err.stack);
+        next(err);
+      } else {
+        var user = new User(req.body);
+        user.save((err, user) => {
+          if(err) {
+            console.error(err.stack);
+            return next(err);
+          } else {
+            res.json(req.body);
+          }
+        });
+      }
+    });
+});
+
+app.get('/users', (req, res) => {
+  User.find({})
+  .then(resp => {
+    res.json(resp.map(user => {
+      return user.toJson();
+    }));
+  });
+});
+
+//remove all users from the database -- for testing purposes only
+app.get('/deleteUsers', (req, res) => {
+  User.remove({}, () => {
+    console.log('removed users');
   });
 });
 

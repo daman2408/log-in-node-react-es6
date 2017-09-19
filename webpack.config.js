@@ -11,7 +11,7 @@ module.exports = {
   },
   devtool: 'inline-source-map',
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
+    // new webpack.HotModuleReplacementPlugin(),
     new BrowserSyncPlugin({
       host: 'localhost',
       port: 8080,

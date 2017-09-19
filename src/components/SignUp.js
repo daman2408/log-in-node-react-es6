@@ -1,8 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const SignUp = (props) => {
   return(
-    <div className="container">
+    <div className="container" noValidate>
       <form onSubmit={props.submitFunction}>
         <div className="form-group row">
           <label className="col-sm-2 col-form-label">First Name</label>
@@ -16,10 +17,13 @@ const SignUp = (props) => {
             <input type="text" name="lastName" className="form-control" id="inputLastName" placeholder="Last Name"/>
           </div>
         </div>
-        <div className="form-group row">
+        <div id="emailDiv" className="form-group row">
           <label className="col-sm-2 col-form-label">Email</label>
           <div className="col-sm-10">
-            <input name="email" type="email" className="form-control" id="inputEmail3" placeholder="Email" />
+            <input name="email" type="email" className="form-control" id="inputEmail" placeholder="Email"/>
+            <div className="form-control-feedback" id="usernameFeedback" style={{display: 'none'}}>
+              username already exists
+            </div>
           </div>
         </div>
         <div className="form-group row">
@@ -52,7 +56,12 @@ const SignUp = (props) => {
                     </div>
                   </form>
                 </div>
-  )
-}
+  );
+};
+
+SignUp.propTypes = {
+  submitFunction: PropTypes.func
+};
+
 
 export default SignUp;

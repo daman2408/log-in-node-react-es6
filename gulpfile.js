@@ -53,6 +53,13 @@ gulp.task('bootstrap-js', function() {
   .pipe(gulp.dest('./public/js'))
 });
 
+//get jquery and place in .public/js
+
+gulp.task('jquery', function() {
+  return gulp.src('./node_modules/jquery/dist/jquery.min.js')
+  .pipe(gulp.dest('./public/js'))
+});
+
 
 //bundle react files into ./public/js using webpack plugin, 'webpack-stream'
 
@@ -68,7 +75,7 @@ gulp.task('build', function() {
 
 
 gulp.task('sort', function() {
-  return sequence('clean:public','html', 'css', 'bootstrap-js','build')()
+  return sequence('clean:public','html', 'css', 'jquery', 'bootstrap-js','build')()
 });
 
 gulp.task('default', ['sort']);
