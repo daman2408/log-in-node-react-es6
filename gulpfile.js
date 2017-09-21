@@ -20,11 +20,6 @@ const p = {
 gulp.task('clean:public', function() {
   return del([p.public])
 });
-//
-gulp.task('clean:dist', function() {
-  return del(['./dist'])
-});
-
 
 //compile view engine files to html and place inside ./public
 
@@ -75,7 +70,7 @@ gulp.task('build', function() {
 
 
 gulp.task('sort', function() {
-  return sequence('clean:public','html', 'css', 'jquery', 'bootstrap-js','build')()
+  return sequence('clean:public', 'css', 'jquery', 'bootstrap-js','build')()
 });
 
 gulp.task('default', ['sort']);

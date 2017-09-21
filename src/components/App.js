@@ -1,16 +1,19 @@
 import React from 'react';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
+import {StaticRouter as Router, Switch, Route} from 'react-router-dom';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 import LogInForm from './LogInForm.js';
 import SignUp from './SignUp.js';
 
 class App extends React.Component {
 
-  state = {};
+  state = {intialData: this.props.initialData};
+
+  staticContext = {};
 
   logInSubmit = (e) => {
     e.preventDefault();
-    console.log(e.target.firstName.value);
+    //do something...
   }
 
   signUpSubmit = e => {
@@ -25,7 +28,6 @@ class App extends React.Component {
     axios.post('/signUp', user)
     .then((resp) => {
       if (resp.status === 200) {
-        console.log('successfully signed up :)');
         document.getElementById('emailDiv').className = 'form-group row has-success';
         document.getElementById('inputEmail').className = 'form-control form-control-success';
         document.getElementById('usernameFeedback').style.display = 'none';
@@ -43,22 +45,27 @@ class App extends React.Component {
 
   render() {
     return (
-            <div>
-              <div className='mh-100'>
-                <div className="jumbotron">
-                  <h1 className="display-1 title">My Project</h1>
-                </div>
-              </div>
-              <Router>
-                <div>
-                  <Route exact path="/" render={() => <LogInForm submitFunction={this.logInSubmit}/>}/>
-                  <Route path="/signup" render={() => <SignUp submitFunction={this.signUpSubmit}/>}/>
-                </div>
-              </Router>
-            </div>
+      <div>
+        <div className='mh-100'>
+          <div className="jumbotron">
+            <h1 className="display-1 title">My Project</h1>
+          </div>
+        </div>
+        <Router context={this.staticContext}>
+          <Switch>
+            <Route exact path='/' render={() => <LogInForm submitFunction={this.logInSubmit}/>}/>
+            <Route path='/signup' render={() => <SignUp submitFunction={this.signUpSubmit} />}></Route>
+          </Switch>
+        </Router>
+      </div>
 
     );
   }
 }
+
+App.propTypes = {
+  initialData: PropTypes.object
+};
+
 
 export default App;

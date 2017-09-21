@@ -1,17 +1,16 @@
-html
+html(lang="en")
   head
-    meta(name="viewport" content="width=device-width, initial-scale-1, shrink-to-fit=no")
+    script(type='text/javascript').
+      window.initialData = JSON.stringify(data)
+    meta(name='viewport' content='width=device-width,initial-scale=1,shrink-to-fit=no')
     link(rel='stylesheet' href='styles/bootstrap.min.css')
     link(rel="stylesheet" href="styles/styles.css")
     title= title
-    body
-      div(class='mh-100' id='root')
-script(src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-  integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
-  crossorigin="anonymous")
-
-script(src="./js/jquery.min.js")
-
-script(src="./js/bootstrap.min.js")
-
-script(src="./js/bundle.js")
+  body
+  div(class='mh-100' id='root')!=data
+  script(src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
+      crossorigin="anonymous")
+  script(src="./js/jquery.min.js")
+  script(src="./js/bootstrap.min.js")
+  script(src="./js/bundle.js")

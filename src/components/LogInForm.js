@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 
 const LogInForm = (props) => {
 //on form submission, get the input values, check database to see if user exists, password hashes match, if pass, authenticate, send token back
-// const logInSubmit = (e) => {
-//   e.preventDefault();
-//   console.log('submitted');
-// }
+  const logInSubmit = (e) => {
+    e.preventDefault();
+    console.log('submitted');
+  };
   return (
       <div className="container-fluid">
         <div className="container">
@@ -28,6 +28,7 @@ const LogInForm = (props) => {
           <div className="row justify-content-center padded">
             <div className="col-12 align-self-center">
               <Link to="/signup"><button className="btn btn-outline-success btn-block my-2 my-sm-0 text-white">Create New</button></Link>
+
             </div>
           </div>
         </div>
