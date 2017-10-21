@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.16.2",
+    "bcrypt": "^1.0.3",
     "body-parser": "^1.17.2",
     "bootstrap": "4.0.0-alpha.6",
     "browser-sync": "^2.18.13",
@@ -20,6 +21,7 @@
     "mongodb": "^2.2.31",
     "mongoose": "^4.11.9",
     "morgan": "^1.8.2",
+    "node-gyp": "^3.6.2",
     "nodemon": "^1.11.0",
     "prop-types": "^15.5.10",
     "pug": "^2.0.0-rc.3",

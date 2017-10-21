@@ -10,14 +10,14 @@ module.exports = {
     app: './src/index.js'
   },
   devtool: 'inline-source-map',
-  plugins: [
-    // new webpack.HotModuleReplacementPlugin(),
-    new BrowserSyncPlugin({
-      host: 'localhost',
-      port: 8080,
-      server: { baseDir: ['public'] }
-    })
-  ],
+  // plugins: [
+  //   // new webpack.HotModuleReplacementPlugin(),
+  //   new BrowserSyncPlugin({
+  //     host: 'localhost',
+  //     port: 8080,
+  //     server: { baseDir: ['public'] }
+  //   })
+  // ],
   output: {
     path: __dirname + '/public/js',
     filename: 'bundle.js'

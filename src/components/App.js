@@ -1,15 +1,15 @@
 import React from 'react';
-import {StaticRouter as Router, Switch, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import LogInForm from './LogInForm.js';
 import SignUp from './SignUp.js';
 
+
 class App extends React.Component {
 
-  state = {intialData: this.props.initialData};
-
-  staticContext = {};
+  // state = {intialData: this.props.initialData};
+  state = {};
 
   logInSubmit = (e) => {
     e.preventDefault();
@@ -28,9 +28,11 @@ class App extends React.Component {
     axios.post('/signUp', user)
     .then((resp) => {
       if (resp.status === 200) {
+        console.log(resp.data);
         document.getElementById('emailDiv').className = 'form-group row has-success';
         document.getElementById('inputEmail').className = 'form-control form-control-success';
         document.getElementById('usernameFeedback').style.display = 'none';
+        window.location = 'http://localhost:3000/welcome';
       }
     })
       .catch((error) => {
@@ -51,12 +53,14 @@ class App extends React.Component {
             <h1 className="display-1 title">My Project</h1>
           </div>
         </div>
-        <Router context={this.staticContext}>
-          <Switch>
-            <Route exact path='/' render={() => <LogInForm submitFunction={this.logInSubmit}/>}/>
-            <Route path='/signup' render={() => <SignUp submitFunction={this.signUpSubmit} />}></Route>
-          </Switch>
-        </Router>
+        <Switch>
+          <Route exact path='/' render={() =>
+            <LogInForm submitFunction={this.logInSubmit}/>}>
+          </Route>
+          <Route exact path='/signup' render={() =>
+            <SignUp submitFunction={this.signUpSubmit} />}>
+          </Route>
+        </Switch>
       </div>
 
     );
