@@ -11,12 +11,36 @@ class App extends React.Component {
   // state = {intialData: this.props.initialData};
   state = {};
 
-  logInSubmit = (e) => {
+  logIn = (e) => {
     e.preventDefault();
-    //do something...
+    //post object containing username and password to server
+    //when response is received, save token to localStorage
+    let user = {
+      username: e.target.username.value,
+      password: e.target.password.value
+    };
+
+    axios.post('/logIn', user)
+      .then(resp => {
+        if(resp.status === 200) {
+          document.getElementById('usernameBox').className = 'form-group row has-success';
+          document.getElementById('passwordBox').className = 'form-group row has-success';
+          document.getElementById('passwordFeedback').style.display = 'none';
+          localStorage.setItem('access_token', resp.data.token);
+          console.log(resp.data);
+          window.location = 'http://localhost:3000/welcome';
+        }
+      })
+      .catch((error) => {
+        if (error.response) {
+          document.getElementById('usernameBox').className = 'form-group row has-danger';
+          document.getElementById('passwordBox').className = 'form-group row has-danger';
+          document.getElementById('passwordFeedback').style.display = 'block';
+        }
+      });
   }
 
-  signUpSubmit = e => {
+  signUp = e => {
     e.preventDefault();
     let user = {
       first_name: e.target.firstName.value,
@@ -28,6 +52,7 @@ class App extends React.Component {
     axios.post('/signUp', user)
     .then((resp) => {
       if (resp.status === 200) {
+
         console.log(resp.data);
         document.getElementById('emailDiv').className = 'form-group row has-success';
         document.getElementById('inputEmail').className = 'form-control form-control-success';
@@ -53,14 +78,16 @@ class App extends React.Component {
             <h1 className="display-1 title">My Project</h1>
           </div>
         </div>
+
         <Switch>
           <Route exact path='/' render={() =>
-            <LogInForm submitFunction={this.logInSubmit}/>}>
+            <LogInForm logIn={this.logIn}/>}>
           </Route>
           <Route exact path='/signup' render={() =>
-            <SignUp submitFunction={this.signUpSubmit} />}>
+            <SignUp signUp={this.signUp} />}>
           </Route>
         </Switch>
+
       </div>
 
     );

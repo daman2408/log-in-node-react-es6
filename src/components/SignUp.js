@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const SignUp = (props) => {
   return(
     <div className="container" noValidate>
-      <form onSubmit={props.submitFunction}>
+      <form onSubmit={props.signUp}>
         <div className="form-group row">
           <label className="col-sm-2 col-form-label">First Name</label>
           <div className="col-sm-10">
@@ -60,7 +60,7 @@ const SignUp = (props) => {
 };
 
 SignUp.propTypes = {
-  submitFunction: PropTypes.func
+  signUp: PropTypes.func
 };
 
 

@@ -6,12 +6,21 @@ import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import User from '../UserSchema.js';
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import {MemoryRouter as Router, Route} from 'react-router-dom';
 import App from '../src/components/App.js';
 
 const app = express();
+
+var signToken = function(id) {
+  return jwt.sign(
+    {_id: id},
+    config.secrets.jwt,
+    {expiresIn: config.expireTime}
+  );
+};
 
 mongoose.connect('mongodb://localhost/myProject', {
   useMongoClient: true
@@ -61,7 +70,34 @@ app.post('/signUp', (req, res, next) => {
     });
 });
 
+app.post('/logIn', (req, res, next) => {
+  console.log(req.body);
+  var username = req.body.username;
+  var password = req.body.password;
+  //verify
+
+  User.findOne({username: username})
+    .then((user) => {
+      if(user) {
+        let plainPass = req.body.password;
+        let hashed  = user.password;
+        let userId = user._id;
+        if(bcrypt.compareSync(plainPass, hashed)) {
+          const token = signToken(userId);
+          res.json({token: token});
+        } else {
+          console.error('password is incorrect');
+          next(err);
+        }
+      } else {
+        console.error('username is incorrect');
+        next(err);
+      }
+    });
+});
+
 app.get('/welcome', (req, res) => {
+  console.log('welcome');
   res.render('welcome', {title: 'Welcome!'});
 });
 

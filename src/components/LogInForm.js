@@ -11,13 +11,16 @@ const LogInForm = (props) => {
   return (
       <div className="container-fluid">
         <div className="container">
-          <form className="padded" onSubmit={props.submitFunction}>
+          <form className="padded" onSubmit={props.logIn}>
             <div className="row justify-content-center">
-              <div className="col-12 align-self-center">
-                <input className="form-control mr-sm-2" type="email" placeholder="email" />
+              <div id="usernameBox" className="col-12 align-self-center">
+                <input name="username" className="form-control mr-sm-2" type="email" id="username" placeholder="email" />
               </div>
-              <div className="col-12 align-self-center">
-                <input className="form-control mr-sm-2" type="password" placeholder="password" />
+              <div id="passwordBox" className="col-12 align-self-center">
+                <input name="password" className="form-control mr-sm-2" type="password" id="plainTextPassword" placeholder="password" />
+                <div className="form-control-feedback" id="passwordFeedback" style={{display: 'none'}}>
+                  incorrect password
+                </div>
               </div>
               <div className="col-12 align-self-center">
                 <button className="btn btn-outline-info btn-block my-2 my-sm-0" type="submit">Log In</button>
@@ -37,7 +40,7 @@ const LogInForm = (props) => {
 };
 
 LogInForm.propTypes = {
-  submitFunction: PropTypes.func
+  logIn: PropTypes.func
 };
 
 export default LogInForm;
