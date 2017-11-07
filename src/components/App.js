@@ -4,12 +4,26 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import LogInForm from './LogInForm.js';
 import SignUp from './SignUp.js';
+import Profile from './Profile.js';
 
 
 class App extends React.Component {
 
   // state = {intialData: this.props.initialData};
-  state = {};
+  state = {
+    loggedIn: false
+  };
+
+  logout = (e) => {
+    e.preventDefault();
+    this.setState({
+      loggedIn: false,
+      user: null
+    });
+    if(window.location === 'http://localhost:3000/signUp') {
+      window.location = 'http://localhost:3000/';
+    }
+  };
 
   logIn = (e) => {
     e.preventDefault();
@@ -26,9 +40,12 @@ class App extends React.Component {
           document.getElementById('usernameBox').className = 'form-group row has-success';
           document.getElementById('passwordBox').className = 'form-group row has-success';
           document.getElementById('passwordFeedback').style.display = 'none';
+          console.log(resp.data.user);
           localStorage.setItem('access_token', resp.data.token);
-          console.log(resp.data);
-          window.location = 'http://localhost:3000/welcome';
+          this.setState({
+            loggedIn: true,
+            user: resp.data.user
+          });
         }
       })
       .catch((error) => {
@@ -52,12 +69,14 @@ class App extends React.Component {
     axios.post('/signUp', user)
     .then((resp) => {
       if (resp.status === 200) {
-
-        console.log(resp.data);
         document.getElementById('emailDiv').className = 'form-group row has-success';
         document.getElementById('inputEmail').className = 'form-control form-control-success';
         document.getElementById('usernameFeedback').style.display = 'none';
-        window.location = 'http://localhost:3000/welcome';
+        console.log(resp.data);
+        this.setState({
+          loggedIn: true,
+          user: resp.data
+        });
       }
     })
       .catch((error) => {
@@ -70,27 +89,42 @@ class App extends React.Component {
       });
   }
 
+
+
   render() {
-    return (
-      <div>
-        <div className='mh-100'>
-          <div className="jumbotron">
-            <h1 className="display-1 title">My Project</h1>
+    if(!this.state.loggedIn) {
+      return (
+        <div>
+          <div className='mh-100'>
+            <div className="jumbotron">
+              <h1 className="display-1 title">My Project</h1>
+            </div>
           </div>
+
+          <Switch>
+            <Route exact path='/' render={() =>
+              <LogInForm logIn={this.logIn}/>}>
+            </Route>
+            <Route exact path='/signup' render={() =>
+              <SignUp signUp={this.signUp} />}>
+            </Route>
+          </Switch>
+
         </div>
 
-        <Switch>
-          <Route exact path='/' render={() =>
-            <LogInForm logIn={this.logIn}/>}>
-          </Route>
-          <Route exact path='/signup' render={() =>
-            <SignUp signUp={this.signUp} />}>
-          </Route>
-        </Switch>
-
-      </div>
-
-    );
+      );
+    } else {
+      return (
+        <div>
+          <div className="jumbotron">
+            <h1>Welcome {this.state.user.first_name}</h1>
+          </div>
+          <div className="container">
+            <button type="button" className="btn btn-danger" onClick={this.logout}>Logout</button>
+          </div>
+        </div>
+      );
+    }
   }
 }
 

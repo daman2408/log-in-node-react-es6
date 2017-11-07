@@ -4,10 +4,6 @@ import PropTypes from 'prop-types';
 
 const LogInForm = (props) => {
 //on form submission, get the input values, check database to see if user exists, password hashes match, if pass, authenticate, send token back
-  const logInSubmit = (e) => {
-    e.preventDefault();
-    console.log('submitted');
-  };
   return (
       <div className="container-fluid">
         <div className="container">
