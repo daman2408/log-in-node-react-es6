@@ -20,7 +20,7 @@ class App extends React.Component {
       loggedIn: false,
       user: null
     });
-    window.location = 'http://localhost:3000/';
+    window.location.pathname = '/';
   };
 
   logIn = (e) => {
