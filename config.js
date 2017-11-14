@@ -9,6 +9,9 @@ export default {
   secrets: {
     jwt: process.env.JWT || 'gumball'
   },
+  db: {
+    url: process.env.MONGODB_URI
+  },
   get serverUrl() {
     return `http://${this.host}:${this.port}`;
   }

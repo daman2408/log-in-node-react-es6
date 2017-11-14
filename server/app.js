@@ -14,7 +14,7 @@ import User from './UserSchema.js';
 
 const app = express();
 
-mongoose.connect('mongodb://localhost/myProject', {
+mongoose.connect(config.db.url, {
   useMongoClient: true
 });
 
