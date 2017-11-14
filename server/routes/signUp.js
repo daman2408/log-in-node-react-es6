@@ -17,12 +17,13 @@ signUpRouter.post('/', (req, res, next) => {
         var hash = bcrypt.hashSync(plainPassword, salt);
         req.body.password = hash;
         var user = new User(req.body);
+        req.user = user;
         user.save((err, user) => {
           if(err) {
             console.error(err.stack);
             return next(err);
           } else {
-            res.json(user);
+            res.json(user.toJson());
           }
         });
       }

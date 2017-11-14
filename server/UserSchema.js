@@ -23,8 +23,10 @@ var UserSchema = new mongoose.Schema({
 });
 
 UserSchema.methods = {
+  //turns mongoose user into javascript object. removes all mongoose methods i.e. .save(), .etc
   toJson: function() {
     var obj = this.toObject();
+    delete obj.password;
     return obj;
   }
 };

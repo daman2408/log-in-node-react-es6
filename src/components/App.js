@@ -20,9 +20,7 @@ class App extends React.Component {
       loggedIn: false,
       user: null
     });
-    if(window.location === 'http://localhost:3000/signUp') {
-      window.location = 'http://localhost:3000/';
-    }
+    window.location = 'http://localhost:3000/';
   };
 
   logIn = (e) => {
