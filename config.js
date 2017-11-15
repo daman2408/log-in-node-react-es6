@@ -10,7 +10,7 @@ export default {
     jwt: process.env.JWT || 'gumball'
   },
   db: {
-    url: process.env.MONGODB_URI
+    url: process.env.MONGODB_URI || 'mongodb://localhost/myProject'
   },
   get serverUrl() {
     return `http://${this.host}:${this.port}`;
