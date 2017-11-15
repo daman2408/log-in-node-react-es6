@@ -18,6 +18,7 @@
     "bootstrap": "4.0.0-alpha.6",
     "browser-sync": "2.18.13",
     "express": "4.15.4",
+    "foreman": "2.0.0",
     "jsonwebtoken": "8.1.0",
     "mongodb": "2.2.31",
     "mongoose": "4.11.9",
