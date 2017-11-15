@@ -1,7 +1,7 @@
 import express from 'express';
 const signUpRouter = express.Router();
 
-import User from '../UserSchema.js';
+import User from '../user_schema.js';
 import bcrypt from 'bcrypt';
 
 signUpRouter.post('/', (req, res, next) => {

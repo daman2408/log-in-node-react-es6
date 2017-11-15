@@ -5,12 +5,12 @@ import config from '../config.js';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import logInRouter from './routes/login.js';
-import signUpRouter from './routes/signUp.js';
+import signUpRouter from './routes/sign_up.js';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import {MemoryRouter as Router, Route} from 'react-router-dom';
-import App from '../src/components/App.js';
-import User from './UserSchema.js';
+import App from '../src/components/app.js';
+import User from './user_schema.js';
 
 const app = express();
 
@@ -46,14 +46,14 @@ app.get('/users', (req, res) => {
 });
 
 //remove all users from the database -- for testing purposes only
-app.get('/deleteUsers', (req, res) => {
-  User.remove({}, () => {
-    console.log('removed users');
-  })
-    .then((resp) => {
-      return res.json(resp);
-    });
-});
+// app.get('/deleteUsers', (req, res) => {
+//   User.remove({}, () => {
+//     console.log('removed users');
+//   })
+//     .then((resp) => {
+//       return res.json(resp);
+//     });
+// });
 
 
 

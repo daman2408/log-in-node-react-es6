@@ -2,9 +2,9 @@ import React from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import axios from 'axios';
 import PropTypes from 'prop-types';
-import LogInForm from './LogInForm.js';
-import SignUp from './SignUp.js';
-import Profile from './Profile.js';
+import LogInForm from './log_in_form.js';
+import SignUp from './sign_up.js';
+import Profile from './profile.js';
 
 
 class App extends React.Component {
